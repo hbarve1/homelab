@@ -1,0 +1,4 @@
+ingressController:
+  enabled: true
+proxy:
+  type: LoadBalancer

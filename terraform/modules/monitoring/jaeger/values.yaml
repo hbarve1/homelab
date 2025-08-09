@@ -1,0 +1,6 @@
+agent:
+  enabled: true
+collector:
+  enabled: true
+query:
+  enabled: true

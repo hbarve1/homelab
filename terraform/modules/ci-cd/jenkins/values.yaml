@@ -1,0 +1,4 @@
+controller:
+  adminUser: admin
+  adminPassword: admin
+  serviceType: ClusterIP

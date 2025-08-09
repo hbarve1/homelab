@@ -1,0 +1,6 @@
+fe:
+  replicaCount: 1
+be:
+  replicaCount: 1
+cn:
+  replicaCount: 1

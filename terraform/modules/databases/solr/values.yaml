@@ -1,0 +1,6 @@
+replicaCount: 1
+persistence:
+  enabled: true
+  size: 10Gi
+solrOptions:
+  javaMemory: "-Xms512m -Xmx1g"

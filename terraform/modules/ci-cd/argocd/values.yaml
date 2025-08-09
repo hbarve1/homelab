@@ -1,0 +1,114 @@
+# Argo CD Helm chart values
+
+# Global settings
+global:
+  image:
+    tag: "v2.8.4"  # Match with chart version
+
+server:
+  # Set to LoadBalancer if you want external access, or Ingress configuration below
+  service:
+    type: ClusterIP
+  
+  # Enable ingress
+  ingress:
+    enabled: false
+    # For production:
+    # enabled: true
+    # annotations:
+    #   kubernetes.io/ingress.class: nginx
+    #   cert-manager.io/cluster-issuer: letsencrypt-prod
+    # hosts:
+    #   - argocd.example.com
+    # tls:
+    #   - secretName: argocd-tls-certificate
+    #     hosts:
+    #       - argocd.example.com
+
+  # Additional command line arguments
+  extraArgs:
+    - --insecure  # Remove in production
+
+  # High availability mode
+  replicas: 1     # Increase to 2+ in production
+  autoscaling:
+    enabled: false
+    minReplicas: 1
+    maxReplicas: 3
+
+# Configure RBAC for Argo CD
+rbac:
+  # Additional policy rules
+  policy.csv: |
+    # Default policy
+    p, role:readonly, applications, get, */*, allow
+    p, role:readonly, certificates, get, *, allow
+    # Add custom policies here
+
+# Redis configuration
+redis:
+  enabled: true
+
+# Dex for SSO (disabled by default)
+dex:
+  enabled: false
+  # For SSO configuration:
+  # enabled: true
+  # config:
+  #   connectors:
+  #     - type: github
+  #       id: github
+  #       name: GitHub
+  #       config:
+  #         clientID: $GITHUB_CLIENT_ID
+  #         clientSecret: $GITHUB_CLIENT_SECRET
+  #         orgs:
+  #           - name: your-org
+
+# Controller configuration
+controller:
+  replicas: 1
+
+# Resource requirements
+resources:
+  server:
+    requests:
+      cpu: 100m
+      memory: 128Mi
+    limits:
+      cpu: 500m
+      memory: 256Mi
+  repo:
+    requests:
+      cpu: 50m
+      memory: 64Mi
+    limits:
+      cpu: 250m
+      memory: 128Mi
+  controller:
+    requests:
+      cpu: 100m
+      memory: 128Mi
+    limits:
+      cpu: 500m
+      memory: 256Mi
+
+# Certificate management for TLS
+configs:
+  secret:
+    argocdServerAdminPassword: admin
+    argocdServerAdminUsername: admin
+  # TLS configuration
+  tls:
+    certificates: {}
+
+# Application configuration settings (you can add initial applications here)
+# applicationSet:
+#   enabled: true
+
+# Notifications configuration for application events
+notifications:
+  enabled: false
+
+# Add any extra configs as needed
+# extraObjects: []

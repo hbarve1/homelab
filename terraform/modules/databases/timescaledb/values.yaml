@@ -1,0 +1,6 @@
+credentials:
+  superuser:
+    username: admin
+    password: admin
+persistence:
+  size: 10Gi

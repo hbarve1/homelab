@@ -1,0 +1,8 @@
+confluence:
+  licenseKey: ""
+  confluenceHome: /var/atlassian/application-data/confluence
+  database:
+    type: postgres72
+    url: ""
+    user: admin
+    password: admin

@@ -1,0 +1,5 @@
+couchdbUsername: admin
+couchdbPassword: admin
+persistentVolume:
+  enabled: true
+  size: 10Gi

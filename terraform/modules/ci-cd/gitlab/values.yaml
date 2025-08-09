@@ -1,0 +1,5 @@
+global:
+  edition: ce
+  hosts:
+    domain: "gitlab.local"
+  initialRootPassword: admin

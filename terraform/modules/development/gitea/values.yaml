@@ -1,0 +1,7 @@
+gitea:
+  admin:
+    username: admin
+    password: admin
+postgresql:
+  enabled: true
+  postgresqlPassword: admin

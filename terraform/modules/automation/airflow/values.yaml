@@ -1,0 +1,5 @@
+executor: "CeleryExecutor"
+web:
+  defaultUser:
+    username: admin
+    password: admin

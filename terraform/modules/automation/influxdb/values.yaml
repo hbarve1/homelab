@@ -1,0 +1,8 @@
+adminUser:
+  user: admin
+  password: admin
+  organization: homelab
+  bucket: default
+persistence:
+  enabled: true
+  size: 10Gi

@@ -1,0 +1,6 @@
+backendStore:
+  database:
+    type: sqlite
+    sqlite:
+      database: /mlflow/mlflow.db
+artifactRoot: /mlflow/artifacts

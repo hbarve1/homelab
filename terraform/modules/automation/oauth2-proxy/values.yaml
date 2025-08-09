@@ -1,0 +1,4 @@
+config:
+  clientID: "example-client-id"
+  clientSecret: "example-client-secret"
+  cookieSecret: "example-cookie-secret"

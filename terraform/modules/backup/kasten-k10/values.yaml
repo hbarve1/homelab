@@ -1,0 +1,7 @@
+auth:
+  tokenAuth:
+    enabled: false
+  basicAuth:
+    enabled: true
+    username: admin
+    password: admin

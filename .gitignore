@@ -1,2 +1,30 @@
 data
 **/**/data
+
+# Ignore all Terraform state, backup, and plan files
+**/.terraform/
+**/*.tfstate
+**/*.tfstate.*
+**/*.tfvars
+**/*.tfvars.json
+**/*.plan
+**/*.backup
+
+# Ignore local Helm chart archives
+**/*.tgz
+
+# Ignore override and crash files
+**/*.override.tf
+**/*.override.tf.json
+**/crash.log
+
+# Ignore editor and OS temp files
+**/*~
+**/*.swp
+**/*.bak
+**/.DS_Store
+
+# Uncomment below if you want to ignore all .env files
+# **/.env*
+**/.env
+.kube

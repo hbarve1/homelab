@@ -1,0 +1,38 @@
+controller:
+  resources:
+    requests:
+      cpu: 50m
+      memory: 128Mi
+    limits:
+      cpu: 200m
+      memory: 256Mi
+
+router:
+  serviceType: ClusterIP
+  resources:
+    requests:
+      cpu: 50m
+      memory: 128Mi
+    limits:
+      cpu: 200m
+      memory: 256Mi
+  readinessProbe:
+    initialDelaySeconds: 60
+    periodSeconds: 15
+    
+executor:
+  resources:
+    requests:
+      cpu: 50m
+      memory: 128Mi
+    limits:
+      cpu: 200m
+      memory: 256Mi
+  readinessProbe:
+    initialDelaySeconds: 60
+    periodSeconds: 15
+
+storageService:
+  storageClass: "docker.io/hostpath"
+# For Docker Desktop/macOS: use a lightweight resource profile and working storageClass
+# If you use another storageClass, update the value above accordingly

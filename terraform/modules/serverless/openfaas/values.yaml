@@ -1,0 +1,4 @@
+basic_auth:
+  enabled: false
+gateway:
+  replicas: 1

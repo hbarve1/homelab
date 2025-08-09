@@ -1,0 +1,17 @@
+hub:
+  config:
+    JupyterHub:
+      admin_access: true
+  services:
+    admin:
+      admin: true
+singleuser:
+  image:
+    name: jupyter/base-notebook
+    tag: latest
+  memory:
+    limit: 2G
+    guarantee: 1G
+  cpu:
+    limit: 1
+    guarantee: 0.5

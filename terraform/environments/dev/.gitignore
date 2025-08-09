@@ -1,0 +1,32 @@
+# Ignore Terraform state and backup files
+.terraform/
+*.tfstate
+*.tfstate.*
+
+# Ignore sensitive variable files
+*.tfvars
+*.tfvars.json
+
+# Ignore local Helm charts and archives
+*.tgz
+
+# Ignore crash logs and plan files
+crash.log
+*.plan
+
+# Ignore override files
+*.override.tf
+*.override.tf.json
+
+# Ignore backup files
+*~
+
+# Ignore .DS_Store (macOS)
+.DS_Store
+
+# Ignore any other local or temp files
+*.swp
+*.bak
+
+# Uncomment below if you want to ignore all .env files
+# .env*

@@ -1,0 +1,38 @@
+# Kyverno Helm values
+global:
+  image:
+    registry: ghcr.io
+
+replicaCount: 1
+
+image:
+  repository: kyverno/kyverno
+  pullPolicy: IfNotPresent
+
+initImage:
+  repository: kyverno/kyvernopre
+  pullPolicy: IfNotPresent
+
+resources:
+  requests:
+    cpu: 100m
+    memory: 128Mi
+  limits:
+    cpu: 500m
+    memory: 512Mi
+
+serviceMonitor:
+  enabled: true
+
+webhook:
+  enabled: true
+  authentication:
+    enabled: true
+    username: admin
+    password: admin
+
+config:
+  webhookTimeout: 10
+  background: true
+
+podSecurityStandard: restricted

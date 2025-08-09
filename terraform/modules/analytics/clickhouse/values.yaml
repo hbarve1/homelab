@@ -1,0 +1,7 @@
+auth:
+  username: admin
+  password: admin
+  database: default
+persistence:
+  enabled: true
+  size: 10Gi

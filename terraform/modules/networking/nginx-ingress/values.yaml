@@ -1,0 +1,13 @@
+controller:
+  replicaCount: 1
+  service:
+    type: LoadBalancer
+    externalTrafficPolicy: Local
+    extraPorts:
+      - name: bolt
+        port: 7687
+        targetPort: 7687
+  extraArgs:
+    tcp-services-configmap: "networking/nginx-ingress-tcp-services"
+  tcp:
+    7687: "networking/nginx-ingress-tcp-services:7687"

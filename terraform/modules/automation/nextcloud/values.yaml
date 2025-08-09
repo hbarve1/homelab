@@ -1,0 +1,6 @@
+# Minimal values.yaml for Bitnami Nextcloud Helm chart
+# You can customize this as needed for storage, ingress, etc.
+nextcloud:
+  username: admin
+  password: changeme
+  host: ""

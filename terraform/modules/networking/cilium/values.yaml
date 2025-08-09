@@ -1,0 +1,14 @@
+kubeProxyReplacement: strict
+k8sServiceHost: ""
+k8sServicePort: 0
+ipam:
+  mode: "kubernetes"
+operator:
+  replicaCount: 1
+resources:
+  requests:
+    cpu: 100m
+    memory: 256Mi
+  limits:
+    cpu: 500m
+    memory: 512Mi
