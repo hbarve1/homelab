@@ -25,6 +25,7 @@ data
 **/.DS_Store
 
 # Uncomment below if you want to ignore all .env files
-# **/.env*
+**/.env*
 **/.env
+!**/.env.sample
 .kube
