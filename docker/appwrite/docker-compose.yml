@@ -25,8 +25,8 @@ services:
       - 8990:443
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-      - appwrite-config:/storage/config:ro
-      - appwrite-certificates:/storage/certificates:ro
+      - ./data/appwrite-config:/storage/config:ro
+      - ./data/appwrite-certificates:/storage/certificates:ro
     depends_on:
       - appwrite
     networks:
@@ -55,14 +55,14 @@ services:
       - traefik.http.routers.appwrite_api_https.service=appwrite_api
       - traefik.http.routers.appwrite_api_https.tls=true
     volumes:
-      - appwrite-uploads:/storage/uploads:rw
-      - appwrite-imports:/storage/imports:rw
-      - appwrite-cache:/storage/cache:rw
-      - appwrite-config:/storage/config:rw
-      - appwrite-certificates:/storage/certificates:rw
-      - appwrite-functions:/storage/functions:rw
-      - appwrite-sites:/storage/sites:rw
-      - appwrite-builds:/storage/builds:rw
+      - ./data/appwrite-uploads:/storage/uploads:rw
+      - ./data/appwrite-imports:/storage/imports:rw
+      - ./data/appwrite-cache:/storage/cache:rw
+      - ./data/appwrite-config:/storage/config:rw
+      - ./data/appwrite-certificates:/storage/certificates:rw
+      - ./data/appwrite-functions:/storage/functions:rw
+      - ./data/appwrite-sites:/storage/sites:rw
+      - ./data/appwrite-builds:/storage/builds:rw
     depends_on:
       - mariadb
       - redis
@@ -301,12 +301,12 @@ services:
       - redis
       - mariadb
     volumes:
-      - appwrite-uploads:/storage/uploads:rw
-      - appwrite-cache:/storage/cache:rw
-      - appwrite-functions:/storage/functions:rw
-      - appwrite-sites:/storage/sites:rw
-      - appwrite-builds:/storage/builds:rw
-      - appwrite-certificates:/storage/certificates:rw
+      - ./data/appwrite-uploads:/storage/uploads:rw
+      - ./data/appwrite-cache:/storage/cache:rw
+      - ./data/appwrite-functions:/storage/functions:rw
+      - ./data/appwrite-sites:/storage/sites:rw
+      - ./data/appwrite-builds:/storage/builds:rw
+      - ./data/appwrite-certificates:/storage/certificates:rw
     environment:
       - _APP_ENV
       - _APP_WORKER_PER_CORE
@@ -390,10 +390,10 @@ services:
       - redis
       - mariadb
     volumes:
-      - appwrite-functions:/storage/functions:rw
-      - appwrite-sites:/storage/sites:rw
-      - appwrite-builds:/storage/builds:rw
-      - appwrite-uploads:/storage/uploads:rw
+      - ./data/appwrite-functions:/storage/functions:rw
+      - ./data/appwrite-sites:/storage/sites:rw
+      - ./data/appwrite-builds:/storage/builds:rw
+      - ./data/appwrite-uploads:/storage/uploads:rw
     environment:
       - _APP_ENV
       - _APP_WORKER_PER_CORE
@@ -458,8 +458,8 @@ services:
       - redis
       - mariadb
     volumes:
-      - appwrite-config:/storage/config:rw
-      - appwrite-certificates:/storage/certificates:rw
+      - ./data/appwrite-config:/storage/config:rw
+      - ./data/appwrite-certificates:/storage/certificates:rw
     environment:
       - _APP_ENV
       - _APP_WORKER_PER_CORE
@@ -563,7 +563,7 @@ services:
     networks:
       - appwrite
     volumes:
-      - appwrite-uploads:/storage/uploads:rw
+      - ./data/appwrite-uploads:/storage/uploads:rw
     depends_on:
       - redis
     environment:
@@ -614,7 +614,7 @@ services:
     networks:
       - appwrite
     volumes:
-      - appwrite-imports:/storage/imports:rw
+      - ./data/appwrite-imports:/storage/imports:rw
     depends_on:
       - mariadb
     environment:
@@ -866,9 +866,9 @@ services:
       - runtimes
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-      - appwrite-builds:/storage/builds:rw
-      - appwrite-functions:/storage/functions:rw
-      - appwrite-sites:/storage/sites:rw
+      - ./data/appwrite-builds:/storage/builds:rw
+      - ./data/appwrite-functions:/storage/functions:rw
+      - ./data/appwrite-sites:/storage/sites:rw
       # Host mount nessessary to share files between executor and runtimes.
       # It's not possible to share mount file between 2 containers without host mount (copying is too slow)
       - /tmp:/tmp:rw
@@ -914,7 +914,7 @@ services:
     networks:
       - appwrite
     volumes:
-      - appwrite-mariadb:/var/lib/mysql:rw
+      - ./data/appwrite-mariadb:/var/lib/mysql:rw
     environment:
       - MYSQL_ROOT_PASSWORD=${_APP_DB_ROOT_PASS}
       - MYSQL_DATABASE=${_APP_DB_SCHEMA}
@@ -936,7 +936,7 @@ services:
     networks:
       - appwrite
     volumes:
-      - appwrite-redis:/data:rw
+      - ./data/appwrite-redis:/data:rw
 
   # clamav:
   #   image: appwrite/clamav:1.2.0
