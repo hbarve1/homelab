@@ -1,0 +1,13 @@
+services:
+  postgres:
+    image: postgres:15
+    container_name: postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: homelab_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./data/pgdata:/var/lib/postgresql/data
