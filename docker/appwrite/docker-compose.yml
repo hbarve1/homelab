@@ -871,7 +871,7 @@ services:
       - ./data/appwrite-sites:/storage/sites:rw
       # Host mount nessessary to share files between executor and runtimes.
       # It's not possible to share mount file between 2 containers without host mount (copying is too slow)
-      - /tmp:/tmp:rw
+      - ./data/tmp:/tmp:rw
     environment:
       - OPR_EXECUTOR_INACTIVE_TRESHOLD=$_APP_COMPUTE_INACTIVE_THRESHOLD
       - OPR_EXECUTOR_MAINTENANCE_INTERVAL=$_APP_COMPUTE_MAINTENANCE_INTERVAL
