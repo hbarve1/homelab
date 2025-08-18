@@ -1,0 +1,38 @@
+api:
+  enabled: true
+  address: 0.0.0.0:9001
+
+sources:
+  docker_source:
+    type: docker_logs
+    include_containers:
+      - supabase-auth
+      - supabase-rest
+      - supabase-storage
+      - realtime-dev.supabase-realtime
+      - supabase-edge-functions
+      - supabase-db
+
+transforms:
+  docker_remap:
+    type: remap
+    inputs:
+      - docker_source
+    source: |
+      . = parse_json!(.message)
+      .timestamp = .time
+      .container_id = .container_id
+      .container_name = .container_name
+
+sinks:
+  logflare_sink:
+    type: http
+    inputs:
+      - docker_remap
+    uri: http://analytics:4000/logs/docker
+    method: post
+    auth:
+      strategy: bearer
+      token: "${LOGFLARE_PUBLIC_ACCESS_TOKEN}"
+    encoding:
+      codec: json

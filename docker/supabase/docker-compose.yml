@@ -447,7 +447,7 @@ services:
     image: timberio/vector:0.28.1-alpine
     restart: unless-stopped
     volumes:
-      - ./volumes/logs/vector.yml:/etc/vector/vector.yml:ro,z
+      - ./volumes/logs:/etc/vector:ro,z
       - ${DOCKER_SOCKET_LOCATION}:/var/run/docker.sock:ro,z
     healthcheck:
       test:
@@ -467,7 +467,7 @@ services:
     command:
       [
         "--config",
-        "/etc/vector/vector.yml"
+        "/etc/vector/config.yml"
       ]
     security_opt:
       - "label=disable"
@@ -528,4 +528,3 @@ services:
 
 volumes:
   db-config:
-  
