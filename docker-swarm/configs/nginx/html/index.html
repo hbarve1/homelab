@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homelab Docker Swarm</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+        
+        .container {
+            text-align: center;
+            max-width: 800px;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+        }
+        
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+        
+        .services {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        
+        .service {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1rem;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: transform 0.3s ease;
+        }
+        
+        .service:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        .service h3 {
+            margin-bottom: 0.5rem;
+            color: #4ecdc4;
+        }
+        
+        .service p {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        .status {
+            margin-top: 2rem;
+            padding: 1rem;
+            background: rgba(76, 175, 80, 0.2);
+            border-radius: 10px;
+            border: 1px solid rgba(76, 175, 80, 0.3);
+        }
+        
+        .status-indicator {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            background: #4caf50;
+            border-radius: 50%;
+            margin-right: 0.5rem;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+        
+        .footer {
+            margin-top: 2rem;
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🐳 Homelab Docker Swarm</h1>
+        <p class="subtitle">Your self-hosted services are running smoothly!</p>
+        
+        <div class="status">
+            <span class="status-indicator"></span>
+            <strong>System Status: Online</strong>
+        </div>
+        
+        <div class="services">
+            <div class="service">
+                <h3>🌐 Web Services</h3>
+                <p>Frontend applications and static content</p>
+            </div>
+            
+            <div class="service">
+                <h3>🔧 API Services</h3>
+                <p>Backend APIs and microservices</p>
+            </div>
+            
+            <div class="service">
+                <h3>🗄️ Databases</h3>
+                <p>PostgreSQL, Redis, and other data stores</p>
+            </div>
+            
+            <div class="service">
+                <h3>📊 Monitoring</h3>
+                <p>Prometheus, Grafana, and health checks</p>
+            </div>
+            
+            <div class="service">
+                <h3>📝 Logging</h3>
+                <p>ELK stack for centralized logging</p>
+            </div>
+            
+            <div class="service">
+                <h3>💾 Storage</h3>
+                <p>MinIO object storage and backups</p>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>Powered by Docker Swarm | Built with ❤️ for homelab enthusiasts</p>
+        </div>
+    </div>
+    
+    <script>
+        // Simple health check
+        fetch('/health')
+            .then(response => response.text())
+            .then(data => {
+                console.log('Health check:', data);
+            })
+            .catch(error => {
+                console.error('Health check failed:', error);
+            });
+        
+        // Update timestamp
+        setInterval(() => {
+            const now = new Date();
+            document.title = `Homelab Docker Swarm - ${now.toLocaleTimeString()}`;
+        }, 1000);
+    </script>
+</body>
+</html>

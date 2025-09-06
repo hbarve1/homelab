@@ -1,0 +1,15 @@
+version: '3.8'
+
+networks:
+  backend:
+    driver: overlay
+    driver_opts:
+      encrypted: "true"
+    ipam:
+      config:
+        - subnet: 10.2.0.0/16
+          gateway: 10.2.0.1
+    attachable: true
+    labels:
+      - "com.homelab.network.type=backend"
+      - "com.homelab.network.purpose=internal-communication"
