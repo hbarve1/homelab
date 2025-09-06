@@ -383,6 +383,10 @@ services:
       # Uncomment to use Big Query backend for analytics
       # GOOGLE_PROJECT_ID: ${GOOGLE_PROJECT_ID}
       # GOOGLE_PROJECT_NUMBER: ${GOOGLE_PROJECT_NUMBER}
+    # command:
+    #   - /bin/sh
+    #   - -c
+    #   - "sleep 5 && /opt/app/rel/logflare/bin/logflare eval 'Logflare.Release.migrate' && /opt/app/rel/logflare/bin/logflare start"
 
   # Comment out everything below this point if you are using an external Postgres database
   db:
