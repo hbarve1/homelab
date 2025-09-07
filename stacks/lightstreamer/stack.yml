@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  lightstreamer:
+    image: lightstreamer:7
+    container_name: lightstreamer
+    ports:
+      - "8080:8080"
+    volumes:
+      - /mnt/data/lightstreamer:/LS
+    deploy:
+      mode: replicated
+      replicas: 1
+      restart_policy:
+        condition: on-failure
