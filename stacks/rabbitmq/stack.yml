@@ -1,0 +1,35 @@
+version: '3.8'
+services:
+  rabbitmq3:
+    image: rabbitmq:3-management
+    container_name: rabbitmq3
+    environment:
+      - RABBITMQ_DEFAULT_USER=admin
+      - RABBITMQ_DEFAULT_PASS=admin
+    ports:
+      - "5673:5672"
+      - "15673:15672"
+    volumes:
+      - /mnt/data/rabbitmq3:/var/lib/rabbitmq
+    deploy:
+      mode: replicated
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+
+  rabbitmq4:
+    image: rabbitmq:4-management
+    container_name: rabbitmq4
+    environment:
+      - RABBITMQ_DEFAULT_USER=admin
+      - RABBITMQ_DEFAULT_PASS=admin
+    ports:
+      - "5674:5672"
+      - "15674:15672"
+    volumes:
+      - /mnt/data/rabbitmq4:/var/lib/rabbitmq
+    deploy:
+      mode: replicated
+      replicas: 1
+      restart_policy:
+        condition: on-failure
