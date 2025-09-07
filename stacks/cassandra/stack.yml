@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  cassandra5:
+    image: cassandra:5
+    container_name: cassandra5
+    environment:
+      - CASSANDRA_CLUSTER_NAME=homelab-cluster
+      - CASSANDRA_DC=dc1
+      - CASSANDRA_RACK=rack1
+      - CASSANDRA_ENDPOINT_SNITCH=GossipingPropertyFileSnitch
+    ports:
+      - "9042:9042"
+      - "7000:7000"
+      - "7001:7001"
+      - "7199:7199"
+      - "9160:9160"
+    volumes:
+      - /mnt/data/cassandra5:/var/lib/cassandra
+    deploy:
+      mode: replicated
+      replicas: 1
+      restart_policy:
+        condition: on-failure
