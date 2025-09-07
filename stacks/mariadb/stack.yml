@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  mariadb12:
+    image: mariadb:12
+    environment:
+      MARIADB_ROOT_PASSWORD: rootpassword12
+      MARIADB_DATABASE: db12
+      MARIADB_USER: user12
+      MARIADB_PASSWORD: password12
+    ports:
+      - "33010:3306"
+    volumes:
+      - /mnt/data/mariadb12:/var/lib/mysql
+    deploy:
+      replicas: 1
+      placement:
+        constraints:
+          - node.role == manager
