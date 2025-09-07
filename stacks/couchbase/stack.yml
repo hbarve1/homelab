@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  couchbase7:
+    image: couchbase:community-7.6.2
+    environment:
+      COUCHBASE_ADMINISTRATOR_USERNAME: admin
+      COUCHBASE_ADMINISTRATOR_PASSWORD: password
+    ports:
+      - "8091:8091"   # Web UI
+      - "8092:8092"   # Views
+      - "8093:8093"   # Query
+      - "8094:8094"   # Full Text Search
+      - "11210:11210" # Data
+    volumes:
+      - /mnt/data/couchbase7:/opt/couchbase/var
+    deploy:
+      replicas: 1
+      placement:
+        constraints:
+          - node.role == manager
