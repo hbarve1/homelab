@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  memcached:
+    image: memcached:1
+    ports:
+      - "11211:11211"
+    command: memcached -m 128m
+    deploy:
+      replicas: 1
+      placement:
+        constraints:
+          - node.role == manager
