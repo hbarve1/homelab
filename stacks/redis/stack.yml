@@ -1,0 +1,79 @@
+version: '3.8'
+
+services:
+  redis5:
+    image: redis:5
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis5-data:/data
+    deploy:
+      replicas: 1
+      placement:
+        constraints:
+          - node.role == manager
+
+  redis6:
+    image: redis:6
+    ports:
+      - "6380:6379"
+    volumes:
+      - redis6-data:/data
+    deploy:
+      replicas: 1
+      placement:
+        constraints:
+          - node.role == manager
+
+  redis7:
+    image: redis:7
+    ports:
+      - "6381:6379"
+    volumes:
+      - redis7-data:/data
+    deploy:
+      replicas: 1
+      placement:
+        constraints:
+          - node.role == manager
+
+  redis8:
+    image: redis:8
+    ports:
+      - "6382:6379"
+    volumes:
+      - redis8-data:/data
+    deploy:
+      replicas: 1
+      placement:
+        constraints:
+          - node.role == manager
+
+volumes:
+  redis5-data:
+    driver: local
+    driver_opts:
+      type: nfs
+      o: addr=192.168.1.200,rw,soft,nfsvers=4,no_root_squash
+      device: ":/mnt/swarm-data/redis5"
+
+  redis6-data:
+    driver: local
+    driver_opts:
+      type: nfs
+      o: addr=192.168.1.200,rw,soft,nfsvers=4,no_root_squash
+      device: ":/mnt/swarm-data/redis6"
+
+  redis7-data:
+    driver: local
+    driver_opts:
+      type: nfs
+      o: addr=192.168.1.200,rw,soft,nfsvers=4,no_root_squash
+      device: ":/mnt/swarm-data/redis7"
+
+  redis8-data:
+    driver: local
+    driver_opts:
+      type: nfs
+      o: addr=192.168.1.200,rw,soft,nfsvers=4,no_root_squash
+      device: ":/mnt/swarm-data/redis8"
