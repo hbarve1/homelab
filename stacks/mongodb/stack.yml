@@ -1,0 +1,50 @@
+version: '3.8'
+
+services:
+  mongodb6:
+    image: mongo:6
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: user
+      MONGO_INITDB_ROOT_PASSWORD: password
+      MONGO_INITDB_DATABASE: homelab_db
+    ports:
+      - "27017:27017"
+    volumes:
+      - /mnt/data/mongodb6:/data/db
+    deploy:
+      replicas: 1
+      placement:
+        constraints:
+          - node.role == manager
+
+  mongodb7:
+    image: mongo:7
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: user
+      MONGO_INITDB_ROOT_PASSWORD: password
+      MONGO_INITDB_DATABASE: homelab_db
+    ports:
+      - "27018:27017"
+    volumes:
+      - /mnt/data/mongodb7:/data/db
+    deploy:
+      replicas: 1
+      placement:
+        constraints:
+          - node.role == manager
+
+  mongodb8:
+    image: mongo:8
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: user
+      MONGO_INITDB_ROOT_PASSWORD: password
+      MONGO_INITDB_DATABASE: homelab_db
+    ports:
+      - "27019:27017"
+    volumes:
+      - /mnt/data/mongodb8:/data/db
+    deploy:
+      replicas: 1
+      placement:
+        constraints:
+          - node.role == manager
