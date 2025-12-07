@@ -2,52 +2,51 @@ resource "helm_release" "dgraph" {
   name             = "dgraph"
   repository       = "https://charts.dgraph.io"
   chart            = "dgraph"
-  version          = "24.1.1"
-  namespace        = "dgraph"
-  create_namespace = true
+  version          = "24.1.4"
+  namespace        = var.namespace
+  timeout          = 900  # 15 minutes timeout
 
   values = [
     yamlencode({
       alpha = {
-        replicaCount = null # Let HPA or KEDA manage scaling, not fixed
+        replicaCount = 1
         persistence = {
           enabled      = true
-          storageClass = "standard"
-          size         = "100Gi"
+          storageClass = "microk8s-hostpath"  # Use MicroK8s default storage class
+          size         = "5Gi"
         }
         resources = {
           requests = {
-            memory = "8Gi"
-            cpu    = "2"
+            memory = "512Mi"  # Minimal memory
+            cpu    = "100m"   # Minimal CPU
           }
           limits = {
-            memory = "16Gi"
+            memory = "1Gi"
+            cpu    = "500m"
           }
         }
         securityContext = {
           enabled = false
         }
         autoscaling = {
-          enabled = true
-          minReplicas = 2
-          maxReplicas = 20
-          targetCPUUtilizationPercentage = 70
+          enabled = false
         }
       }
       zero = {
-        replicaCount = 3
+        replicaCount = 1
         persistence = {
           enabled      = true
-          storageClass = "standard"
-          size         = "32Gi"
+          storageClass = "microk8s-hostpath"  # Use MicroK8s default storage class
+          size         = "2Gi"
         }
         resources = {
           requests = {
-            memory = "2Gi"
-            cpu    = "1"
+            memory = "256Mi"  # Minimal memory
+            cpu    = "100m"    # Minimal CPU
           }
           limits = {
-            memory = "4Gi"
+            memory = "512Mi"
+            cpu    = "250m"
           }
         }
         securityContext = {
@@ -64,8 +63,8 @@ resource "helm_release" "dgraph" {
         }
         resources = {
           requests = {
-            memory = "256Mi"
-            cpu    = "200m"
+            memory = "128Mi"  # Reduced
+            cpu    = "100m"    # Reduced
           }
         }
       }

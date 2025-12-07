@@ -136,9 +136,10 @@ module "redis_8" {
 #   storage_size          = "8Gi"
 # }
 
-# module "dgraph" {
-#   source = "../databases/dgraph"
-# }
+module "dgraph" {
+  source = "./dgraph"
+  namespace = var.namespace
+}
 
 module "qdrant" {
   source = "./qdrant"
