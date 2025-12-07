@@ -35,10 +35,10 @@ provider "helm" {
 #   }
 # }
 
-# module "databases" {
-#   source = "../prod/modules/databases"
-#   namespace = kubernetes_namespace.databases.metadata[0].name
-# }
+module "databases" {
+  source = "../../modules/databases"
+  namespace = kubernetes_namespace.databases.metadata[0].name
+}
 
 # module "networking" {
 #   source = "../prod/modules/networking"
@@ -75,34 +75,34 @@ provider "helm" {
 #   ]
 # }
 
-module "dgraph" {
-  source = "../../modules/databases/dgraph"
-}
+# module "dgraph" {
+#   source = "../../modules/databases/dgraph"
+# }
 
-resource "kubernetes_namespace" "tigergraph" {
-  metadata {
-    name = "tigergraph"
-  }
-}
+# resource "kubernetes_namespace" "tigergraph" {
+#   metadata {
+#     name = "tigergraph"
+#   }
+# }
 
-resource "helm_release" "tigergraph" {
-  name             = "tigergraph"
-  namespace        = kubernetes_namespace.tigergraph.metadata[0].name
-  repository       = "https://tigergraph-charts.s3.amazonaws.com/"
-  chart            = "tigergraph"
-  version          = "1.5.0" # Use the latest stable version if needed
-  create_namespace = false
+# resource "helm_release" "tigergraph" {
+#   name             = "tigergraph"
+#   namespace        = kubernetes_namespace.tigergraph.metadata[0].name
+#   repository       = "https://tigergraph-charts.s3.amazonaws.com/"
+#   chart            = "tigergraph"
+#   version          = "1.5.0" # Use the latest stable version if needed
+#   create_namespace = false
 
-  values = [
-    yamlencode({
-      storage = {
-        class = "standard"
-        size  = "100Gi"
-      }
-      service = {
-        type = "LoadBalancer"
-      }
-      # Add more TigerGraph-specific values as needed
-    })
-  ]
-}
+#   values = [
+#     yamlencode({
+#       storage = {
+#         class = "standard"
+#         size  = "100Gi"
+#       }
+#       service = {
+#         type = "LoadBalancer"
+#       }
+#       # Add more TigerGraph-specific values as needed
+#     })
+#   ]
+# }

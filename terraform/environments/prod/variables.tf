@@ -1,31 +1,48 @@
+variable "postgres_password" {
+  type        = string
+  description = "Postgres admin password"
+  sensitive   = true
+  default     = "admin"
+}
 
-# variable "neo4j_username" {
-#   description = "Username for the Neo4j database admin user."
-#   type        = string
-#   default     = "neo4j"
-# }
+variable "neo4j_password" {
+  type        = string
+  description = "Neo4j admin password"
+  sensitive   = true
+  default     = "admin"
+}
 
-# variable "neo4j_password" {
-#   description = "Password for the Neo4j database admin user."
-#   type        = string
-#   default     = "YourStrongPasswordHere" # Change this to a secure password
-#   sensitive   = true
-# }
+variable "mysql_root_password" {
+  type        = string
+  description = "MySQL root password"
+  sensitive   = true
+  default     = "admin"
+}
 
-# variable "neo4j_db" {
-#   description = "Name of the Neo4j database to create."
-#   type        = string
-#   default     = "neo4j"
-# }
+variable "redis_password" {
+  type        = string
+  description = "Redis password"
+  sensitive   = true
+  default     = "admin"
+}
 
-# variable "neo4j_storage_size" {
-#   description = "Persistent volume size for Neo4j data."
-#   type        = string
-#   default     = "64Gi"
-# }
+variable "mongodb_root_password" {
+  type        = string
+  description = "MongoDB root password"
+  sensitive   = true
+  default = "admin"
+}
 
-# variable "neo4j_advertised_host" {
-#   description = "The advertised host for Neo4j service."
-#   type        = string
-#   default     = "neo4j.neo4j.svc.cluster.local" # Change this to your actual domain
-# }
+variable "elasticsearch_password" {
+  type        = string
+  description = "Elasticsearch password for the elastic user"
+  sensitive   = true
+  default     = "admin"
+}
+
+variable "rabbitmq_password" {
+  type        = string
+  description = "RabbitMQ default user password"
+  sensitive   = true
+  default     = "changeme"
+}
