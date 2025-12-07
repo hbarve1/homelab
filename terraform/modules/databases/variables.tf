@@ -17,18 +17,11 @@ variable "neo4j_password" {
   default = "admin"
 }
 
-variable "mysql1_root_password" {
+variable "mysql_root_password" {
   type        = string
-  description = "MySQL 1 root password"
+  description = "MySQL root password"
   sensitive   = true
-  default = "admin"
-}
-
-variable "mysql2_root_password" {
-  type        = string
-  description = "MySQL 2 root password"
-  sensitive   = true
-  default = "admin"
+  default     = "admin"
 }
 
 variable "redis_password" {

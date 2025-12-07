@@ -68,25 +68,38 @@ module "postgres_18" {
 #   }
 # }
 
-# module "mysql_1" {
-#   source           = "../databases/mysql"
-#   release_name     = "mysql-1-dev"
-#   namespace        = var.namespace  
-#   mysql_root_password = var.mysql1_root_password
-#   mysql_database   = "appdb1"
-#   storage_size     = "8Gi"
-#   chart_version    = "9.19.1"
-# }
+module "mysql_5" {
+  source              = "./mysql"
+  release_name        = "mysql-5"
+  namespace           = var.namespace
+  mysql_root_password = var.mysql_root_password
+  mysql_database      = "mysql5"
+  storage_size        = "8Gi"
+  chart_version       = "9.19.1"
+  mysql_version       = "5.7"
+}
 
-# module "mysql_2" {
-#   source           = "../../modules/databases/mysql"
-#   release_name     = "mysql-2-dev"
-#   namespace        = var.namespace
-#   mysql_root_password = var.mysql2_root_password
-#   mysql_database   = "appdb2"
-#   storage_size     = "8Gi"
-#   chart_version    = "9.18.2"
-# }
+module "mysql_8" {
+  source              = "./mysql"
+  release_name        = "mysql-8"
+  namespace           = var.namespace
+  mysql_root_password = var.mysql_root_password
+  mysql_database      = "mysql8"
+  storage_size        = "8Gi"
+  chart_version       = "9.19.1"
+  mysql_version       = "8.0"
+}
+
+module "mysql_9" {
+  source              = "./mysql"
+  release_name        = "mysql-9"
+  namespace           = var.namespace
+  mysql_root_password = var.mysql_root_password
+  mysql_database      = "mysql9"
+  storage_size        = "8Gi"
+  chart_version       = "9.19.1"
+  mysql_version       = "9.0"
+}
 
 module "redis_6" {
   source           = "../databases/redis"
