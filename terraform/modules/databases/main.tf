@@ -140,7 +140,7 @@ module "redis_8" {
 #   source = "../databases/dgraph"
 # }
 
-# module "qdrant" {
-#   source = "../databases/qdrant"
-#   namespace = var.namespace
-# }
+module "qdrant" {
+  source = "./qdrant"
+  namespace = var.namespace
+}
