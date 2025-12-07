@@ -42,3 +42,16 @@ terraform/
 - `global/`: Shared resources (DNS, monitoring, etc.)
 - `modules/`: Reusable modules for compute, network, storage, k8s, etc.
 - `scripts/`: Helper scripts for provisioning or automation.
+
+
+## Commands
+
+- `terraform init` initializes the Terraform configuration.
+- `terraform plan` creates an execution plan.
+- `terraform apply` applies the changes.
+- `terraform destroy` destroys the changes.
+- `terraform show` shows the current state.
+- `terraform state list` lists the resources in the state.
+- `terraform state show` shows the current state of a resource.
+- `terraform state pull` pulls the current state from the remote server.
+- `terraform state push` pushes the current state to the remote server.
