@@ -20,7 +20,7 @@ provider "kubernetes" {
 }
 
 provider "helm" {
-  kubernetes {
+  kubernetes = {
     config_path = "~/.kube/config"
   }
 }
@@ -40,10 +40,10 @@ module "databases" {
   namespace = kubernetes_namespace.databases.metadata[0].name
 }
 
-# module "networking" {
-#   source = "../prod/modules/networking"
-#   namespace = kubernetes_namespace.networking.metadata[0].name
-# }
+module "networking" {
+  source = "../../modules/networking"
+  namespace = kubernetes_namespace.networking.metadata[0].name
+}
 
 module serverless {
   source    = "../../modules/serverless"
