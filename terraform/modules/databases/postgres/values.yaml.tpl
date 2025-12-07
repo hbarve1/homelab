@@ -13,5 +13,5 @@ primary:
   image:
     registry: docker.io
     repository: bitnamilegacy/postgresql
-    tag: "16"
+    tag: "${postgres_version}"
     pullPolicy: IfNotPresent

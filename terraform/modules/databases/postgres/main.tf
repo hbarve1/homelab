@@ -12,6 +12,7 @@ resource "helm_release" "postgresql" {
       postgres_password = var.postgres_password
       postgres_db       = var.postgres_db
       storage_size      = var.storage_size
+      postgres_version  = var.postgres_version
     })
   ]
 }

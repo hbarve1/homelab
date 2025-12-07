@@ -36,3 +36,9 @@ variable "storage_size" {
   description = "Persistent volume size"
   default     = "10Gi"
 }
+
+variable "postgres_version" {
+  type        = string
+  description = "PostgreSQL version tag (e.g., '15', '16', '17', '18')"
+  default     = "16"
+}
