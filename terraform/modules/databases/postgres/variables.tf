@@ -11,7 +11,7 @@ variable "namespace" {
 variable "chart_version" {
   type        = string
   description = "Bitnami Postgres chart version"
-  default     = "16.7.4"
+  default     = "18.1.13"
 }
 
 variable "postgres_user" {
