@@ -88,13 +88,32 @@ module "postgres_18" {
 #   chart_version    = "9.18.2"
 # }
 
-# module "redis" {
-#   source           = "../databases/redis"
-#   release_name     = "redis-dev"
-#   namespace         = var.namespace
-#   redis_password   = var.redis_password
-#   storage_size     = "8Gi"
-# }
+module "redis_6" {
+  source           = "../databases/redis"
+  release_name     = "redis-6"
+  namespace        = var.namespace
+  redis_password   = var.redis_password
+  storage_size     = "8Gi"
+  redis_version    = "6"
+}
+
+module "redis_7" {
+  source           = "../databases/redis"
+  release_name     = "redis-7"
+  namespace        = var.namespace
+  redis_password   = var.redis_password
+  storage_size     = "8Gi"
+  redis_version    = "7"
+}
+
+module "redis_8" {
+  source           = "../databases/redis"
+  release_name     = "redis-8"
+  namespace        = var.namespace
+  redis_password   = var.redis_password
+  storage_size     = "8Gi"
+  redis_version    = "8"
+}
 
 # module "elasticsearch" {
 #   source                = "../databases/elasticsearch"

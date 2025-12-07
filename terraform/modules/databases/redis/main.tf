@@ -10,6 +10,7 @@ resource "helm_release" "redis" {
     templatefile("${path.module}/values.yaml.tpl", {
       redis_password = var.redis_password
       storage_size   = var.storage_size
+      redis_version  = var.redis_version
     })
   ]
 }
