@@ -124,3 +124,9 @@ resource "kubernetes_namespace" "analytics" {
     name = "analytics"
   }
 }
+
+resource "kubernetes_namespace" "emulators" {
+  metadata {
+    name = "emulators"
+  }
+}
