@@ -45,6 +45,11 @@ module "databases" {
 #   namespace = kubernetes_namespace.networking.metadata[0].name
 # }
 
+module serverless {
+  source    = "../../modules/serverless"
+  namespace = kubernetes_namespace.serverless.metadata[0].name
+}
+
 # resource "helm_release" "neo4j" {
 #   name       = "neo4j"
 #   namespace  = kubernetes_namespace.neo4j.metadata[0].name
