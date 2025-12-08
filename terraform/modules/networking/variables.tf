@@ -52,3 +52,51 @@ variable "dns_ingress_host" {
   type        = string
   default     = "dns.homelab.local"
 }
+
+# Cloudflare Tunnel variables
+variable "cloudflare_tunnel_enabled" {
+  description = "Enable Cloudflare Tunnel module"
+  type        = bool
+  default     = false
+}
+
+variable "cloudflare_tunnel_namespace" {
+  description = "Kubernetes namespace for Cloudflare Tunnel"
+  type        = string
+  default     = "cloudflare-tunnel"
+}
+
+variable "cloudflare_tunnel_id" {
+  description = "Cloudflare Tunnel ID"
+  type        = string
+  default     = ""
+  sensitive   = true
+}
+
+variable "cloudflare_tunnel_credentials_json" {
+  description = "Cloudflare Tunnel credentials JSON"
+  type        = string
+  default     = ""
+  sensitive   = true
+}
+
+variable "cloudflare_tunnel_subdomains" {
+  description = "List of subdomains to route through Cloudflare Tunnel"
+  type        = list(string)
+  default     = [
+    "app",
+    "api",
+    "api-1",
+    "harbor",
+    "grafana",
+    "prometheus",
+    "nextcloud",
+    "pihole"
+  ]
+}
+
+variable "cloudflare_tunnel_replicas" {
+  description = "Number of Cloudflare Tunnel replicas for high availability"
+  type        = number
+  default     = 2
+}

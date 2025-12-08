@@ -22,6 +22,24 @@ module "pihole" {
   ingress_host                  = var.dns_ingress_host
 }
 
+// Cloudflare Tunnel - Multiple subdomains through single tunnel
+module "cloudflare_tunnel" {
+  count = var.cloudflare_tunnel_enabled ? 1 : 0
+  
+  source = "./cloudflare-tunnel"
+  
+  namespace              = var.cloudflare_tunnel_namespace
+  tunnel_id              = var.cloudflare_tunnel_id
+  tunnel_credentials_json = var.cloudflare_tunnel_credentials_json
+  
+  # Multiple subdomains through same tunnel
+  domain     = "hbarve1.com"
+  subdomains = var.cloudflare_tunnel_subdomains
+  
+  # High availability: Multiple replicas across nodes
+  replicas = var.cloudflare_tunnel_replicas
+}
+
 # Run this on original k8s cluster
 # module "cilium" {
 #   source = "../networking/cilium"
