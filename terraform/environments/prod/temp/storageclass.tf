@@ -1,10 +1,38 @@
 resource "kubernetes_storage_class" "standard" {
   metadata {
     name = "standard"
+    annotations = {
+      "storageclass.kubernetes.io/is-default-class" = "true"
+    }
   }
   # For MicroK8s (default):
   storage_provisioner  = "microk8s.io/hostpath"
   volume_binding_mode  = "WaitForFirstConsumer"
+  reclaim_policy       = "Delete"
+  allow_volume_expansion = true
+  parameters = {}
+}
+
+# Storage class matching MicroK8s hostpath (for compatibility with existing PVs)
+resource "kubernetes_storage_class" "microk8s_hostpath" {
+  metadata {
+    name = "microk8s-hostpath"
+  }
+  storage_provisioner  = "microk8s.io/hostpath"
+  volume_binding_mode  = "WaitForFirstConsumer"  # MicroK8s default
+  reclaim_policy       = "Delete"
+  allow_volume_expansion = true
+  parameters = {}
+}
+
+# Storage class with immediate binding for Harbor and other stateful services
+# This binds PVCs immediately instead of waiting for pods to start
+resource "kubernetes_storage_class" "immediate" {
+  metadata {
+    name = "immediate"
+  }
+  storage_provisioner  = "microk8s.io/hostpath"  # Use MicroK8s provisioner
+  volume_binding_mode  = "Immediate"  # Bind immediately, don't wait for pod
   reclaim_policy       = "Delete"
   allow_volume_expansion = true
   parameters = {}
