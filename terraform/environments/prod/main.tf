@@ -60,6 +60,11 @@ module "emulators" {
   namespace = kubernetes_namespace.emulators.metadata[0].name
 }
 
+module "storage" {
+  source    = "../../modules/storage"
+  namespace = kubernetes_namespace.storage.metadata[0].name
+}
+
 # module "simple_api_server" {
 #   source = "../../modules/apps/simple-api-server"
   
