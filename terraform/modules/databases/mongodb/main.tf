@@ -14,4 +14,11 @@ resource "helm_release" "mongodb" {
       mongodb_user_database = var.mongodb_database
     })
   ]
+
+  # Don't wait for all pods to be ready - MongoDB can take time to fully initialize
+  wait = false
+  timeout = 600
+  
+  # Allow partial failures - some pods may take longer to start
+  atomic = false
 }

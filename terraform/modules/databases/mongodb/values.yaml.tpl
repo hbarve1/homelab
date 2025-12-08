@@ -9,3 +9,5 @@ auth:
 persistence:
   enabled: true
   size: ${storage_size}
+  storageClass: "openebs-hostpath"
+  # storageClass: "openebs-single-replica"  # Use OpenEBS with Immediate binding to avoid scheduling issues

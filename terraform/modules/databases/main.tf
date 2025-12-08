@@ -145,3 +145,13 @@ module "qdrant" {
   source = "./qdrant"
   namespace = var.namespace
 }
+
+module "mongodb_8" {
+  source = "./mongodb"
+  release_name = "mongodb"
+  namespace = var.namespace
+  mongodb_root_password = var.mongodb_root_password
+  mongodb_database = "mongodb"
+  storage_size = "10Gi"
+  mongodb_version = "8"
+}
