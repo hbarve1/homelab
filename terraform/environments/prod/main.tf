@@ -60,6 +60,24 @@ module "emulators" {
   namespace = kubernetes_namespace.emulators.metadata[0].name
 }
 
+# module "simple_api_server" {
+#   source = "../../modules/apps/simple-api-server"
+  
+#   namespace      = kubernetes_namespace.apps.metadata[0].name
+#   # Set this to Harbor after it is available (e.g., harbor.hbarve1.com)
+#   image_registry = "registry.container-registry.svc.cluster.local:5000"
+#   image_tag      = "latest"
+  
+#   ingress_enabled = true
+#   ingress_host    = "api-1.hbarve1.com"
+  
+#   replicas = 1
+# }
+
+# module "gitea" {
+#   source = "../../modules/development/gitea"
+# }
+
 # resource "helm_release" "neo4j" {
 #   name       = "neo4j"
 #   namespace  = kubernetes_namespace.neo4j.metadata[0].name
