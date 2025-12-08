@@ -107,6 +107,12 @@ resource "kubernetes_namespace" "openfaas" {
   }
 }
 
+resource "kubernetes_namespace" "apps" {
+  metadata {
+    name = "apps"
+  }
+}
+
 resource "kubernetes_namespace" "openfaas_fn" {
   metadata {
     name = "openfaas-fn"
