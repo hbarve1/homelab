@@ -1,7 +1,7 @@
 
-# module "minio" {
-#   source = "./minio"
-# }
+module "minio" {
+  source = "./minio"
+}
 
 # module "ceph" {
 #   source = "./ceph"
