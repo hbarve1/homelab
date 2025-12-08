@@ -1,13 +1,13 @@
-module "postgres_15" {
-  source            = "../databases/postgres"
-  release_name      = "postgres-15"
-  namespace         = var.namespace
-  postgres_user     = "admin"
-  postgres_password = var.postgres_password
-  postgres_db       = "postgres15"
-  storage_size      = "10Gi"
-  postgres_version  = "15"
-}
+# module "postgres_15" {
+#   source            = "../databases/postgres"
+#   release_name      = "postgres-15"
+#   namespace         = var.namespace
+#   postgres_user     = "admin"
+#   postgres_password = var.postgres_password
+#   postgres_db       = "postgres15"
+#   storage_size      = "10Gi"
+#   postgres_version  = "15"
+# }
 
 module "postgres_16" {
   source            = "../databases/postgres"
