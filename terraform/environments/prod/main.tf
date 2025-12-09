@@ -83,6 +83,10 @@ module "gitea" {
   source = "../../modules/development/gitea"
 }
 
+module "harbor" {
+  source = "../../modules/development/harbor"
+}
+
 # resource "helm_release" "neo4j" {
 #   name       = "neo4j"
 #   namespace  = kubernetes_namespace.neo4j.metadata[0].name

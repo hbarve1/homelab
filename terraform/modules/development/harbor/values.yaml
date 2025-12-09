@@ -3,3 +3,27 @@ expose:
   tls:
     enabled: false
 harborAdminPassword: "admin"
+
+global:
+  storageClass: openebs-hostpath
+
+persistence:
+  enabled: true
+  resourcePolicy: "keep"
+  persistentVolumeClaim:
+    registry:
+      size: 10Gi
+      storageClass: openebs-hostpath
+    jobservice:
+      jobLog:
+        size: 1Gi
+        storageClass: openebs-hostpath
+    database:
+      size: 5Gi
+      storageClass: openebs-hostpath
+    redis:
+      size: 1Gi
+      storageClass: openebs-hostpath
+    trivy:
+      size: 5Gi
+      storageClass: openebs-hostpath
