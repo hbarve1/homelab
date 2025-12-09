@@ -79,9 +79,9 @@ module "storage" {
 #   replicas = 1
 # }
 
-# module "gitea" {
-#   source = "../../modules/development/gitea"
-# }
+module "gitea" {
+  source = "../../modules/development/gitea"
+}
 
 # resource "helm_release" "neo4j" {
 #   name       = "neo4j"

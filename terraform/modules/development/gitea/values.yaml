@@ -2,6 +2,14 @@ gitea:
   admin:
     username: admin
     password: admin
-postgresql:
+# postgresql:
+#   enabled: true
+#   postgresqlPassword: admin
+
+global:
+  storageClass: openebs-hostpath
+
+persistence:
   enabled: true
-  postgresqlPassword: admin
+  storageClass: "openebs-hostpath"
+
