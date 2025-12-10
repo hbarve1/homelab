@@ -1,5 +1,8 @@
 controller:
   replicaCount: 1
+  ingressClass: nginx
+  ingressClassResource:
+    enabled: false
   service:
     type: LoadBalancer
     externalTrafficPolicy: Local

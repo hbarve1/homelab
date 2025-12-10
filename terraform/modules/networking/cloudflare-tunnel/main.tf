@@ -7,14 +7,18 @@
 locals {
   ingress_service_url = "http://${var.ingress_host}:${var.ingress_port}"
   
-  computed_routes = length(var.routes) > 0 ? var.routes : (
+  computed_http_routes = length(var.http_routes) > 0 ? var.http_routes : (
     length(var.subdomains) > 0 && var.domain != "" ? [
       for subdomain in var.subdomains : {
         hostname = "${subdomain}.${var.domain}"
         service  = local.ingress_service_url
       }
-    ] : []
+    ] : (
+      length(var.routes) > 0 ? var.routes : []
+    )
   )
+  
+  tcp_routes = var.tcp_routes
 }
 
 resource "kubernetes_namespace" "cloudflare_tunnel" {
@@ -32,14 +36,19 @@ resource "kubernetes_secret_v1" "cloudflare_tunnel" {
 
   type = "Opaque"
 
-  data = {
-    # Tunnel credentials JSON from Cloudflare
+  data = var.tunnel_token != "" ? {
+    # Token-based authentication (newer method)
+    token = base64encode(var.tunnel_token)
+  } : {
+    # Legacy credentials JSON from Cloudflare
     # Format: {"AccountTag":"...","TunnelID":"...","TunnelSecret":"..."}
     credentials = base64encode(var.tunnel_credentials_json)
   }
 }
 
 resource "kubernetes_config_map_v1" "cloudflare_tunnel_config" {
+  count = var.tunnel_token == "" ? 1 : 0
+  
   metadata {
     name      = "cloudflare-tunnel-config"
     namespace = var.namespace
@@ -52,7 +61,8 @@ resource "kubernetes_config_map_v1" "cloudflare_tunnel_config" {
       ingress_port      = var.ingress_port
       ingress_service   = var.ingress_service
       ingress_namespace = var.ingress_namespace
-      routes            = local.computed_routes
+      http_routes        = local.computed_http_routes
+      tcp_routes         = local.tcp_routes
     })
   }
 }
@@ -102,7 +112,11 @@ resource "kubernetes_deployment_v1" "cloudflare_tunnel" {
           name  = "cloudflared"
           image = "${var.image_repository}:${var.image_tag}"
 
-          command = [
+          command = var.tunnel_token != "" ? [
+            "cloudflared",
+            "tunnel",
+            "run"
+          ] : [
             "cloudflared",
             "tunnel",
             "--config",
@@ -110,18 +124,37 @@ resource "kubernetes_deployment_v1" "cloudflare_tunnel" {
             "run"
           ]
 
-          volume_mount {
-            name       = "credentials"
-            mount_path = "/etc/cloudflared/credentials.json"
-            sub_path   = "credentials"
-            read_only  = true
+          dynamic "env" {
+            for_each = var.tunnel_token != "" ? [1] : []
+            content {
+              name  = "TUNNEL_TOKEN"
+              value_from {
+                secret_key_ref {
+                  name = kubernetes_secret_v1.cloudflare_tunnel.metadata[0].name
+                  key  = "token"
+                }
+              }
+            }
           }
 
-          volume_mount {
-            name       = "config"
-            mount_path = "/etc/cloudflared/config.yaml"
-            sub_path   = "config.yaml"
-            read_only  = true
+          dynamic "volume_mount" {
+            for_each = var.tunnel_token == "" ? [1] : []
+            content {
+              name       = "credentials"
+              mount_path = "/etc/cloudflared/credentials.json"
+              sub_path   = "credentials"
+              read_only  = true
+            }
+          }
+
+          dynamic "volume_mount" {
+            for_each = var.tunnel_token == "" ? [1] : []
+            content {
+              name       = "config"
+              mount_path = "/etc/cloudflared/config.yaml"
+              sub_path   = "config.yaml"
+              read_only  = true
+            }
           }
 
           resources {
@@ -136,21 +169,27 @@ resource "kubernetes_deployment_v1" "cloudflare_tunnel" {
           }
         }
 
-        volume {
-          name = "credentials"
-          secret {
-            secret_name = kubernetes_secret_v1.cloudflare_tunnel.metadata[0].name
-            items {
-              key  = "credentials"
-              path = "credentials.json"
+        dynamic "volume" {
+          for_each = var.tunnel_token == "" ? [1] : []
+          content {
+            name = "credentials"
+            secret {
+              secret_name = kubernetes_secret_v1.cloudflare_tunnel.metadata[0].name
+              items {
+                key  = "credentials"
+                path = "credentials.json"
+              }
             }
           }
         }
 
-        volume {
-          name = "config"
-          config_map {
-            name = kubernetes_config_map_v1.cloudflare_tunnel_config.metadata[0].name
+        dynamic "volume" {
+          for_each = var.tunnel_token == "" ? [1] : []
+          content {
+            name = "config"
+            config_map {
+              name = kubernetes_config_map_v1.cloudflare_tunnel_config.metadata[0].name
+            }
           }
         }
 
@@ -160,8 +199,7 @@ resource "kubernetes_deployment_v1" "cloudflare_tunnel" {
   }
 
   depends_on = [
-    kubernetes_secret_v1.cloudflare_tunnel,
-    kubernetes_config_map_v1.cloudflare_tunnel_config
+    kubernetes_secret_v1.cloudflare_tunnel
   ]
 }
 

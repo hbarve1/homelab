@@ -11,14 +11,23 @@ variable "create_namespace" {
 }
 
 variable "tunnel_id" {
-  description = "Cloudflare Tunnel ID"
+  description = "Cloudflare Tunnel ID (optional if using token)"
   type        = string
+  default     = ""
 }
 
 variable "tunnel_credentials_json" {
-  description = "Cloudflare Tunnel credentials JSON (from cloudflared tunnel create)"
+  description = "Cloudflare Tunnel credentials JSON (deprecated - use tunnel_token instead)"
   type        = string
   sensitive   = true
+  default     = ""
+}
+
+variable "tunnel_token" {
+  description = "Cloudflare Tunnel token (from dashboard - newer method)"
+  type        = string
+  sensitive   = true
+  default     = ""
 }
 
 variable "ingress_host" {
@@ -46,10 +55,28 @@ variable "ingress_namespace" {
 }
 
 variable "routes" {
-  description = "List of routes to configure. Each route should have hostname and service. If empty, all traffic routes to ingress controller which handles hostname-based routing."
+  description = "List of routes to configure. Each route should have hostname and service. If empty, all traffic routes to ingress controller which handles hostname-based routing. DEPRECATED: Use http_routes instead."
   type = list(object({
     hostname = string
     service  = string  # e.g., "http://nginx-ingress-controller.ingress-nginx.svc.cluster.local:80"
+  }))
+  default = []
+}
+
+variable "http_routes" {
+  description = "List of HTTP routes to configure. Each route should have hostname and service. Routes to ingress controller if not specified."
+  type = list(object({
+    hostname = string
+    service  = string  # e.g., "http://nginx-ingress-controller.ingress-nginx.svc.cluster.local:80"
+  }))
+  default = []
+}
+
+variable "tcp_routes" {
+  description = "List of TCP routes for database and other TCP services. Each route should have hostname and service (host:port)."
+  type = list(object({
+    hostname = string
+    service  = string  # e.g., "postgres-15-postgresql.databases.svc.cluster.local:5432"
   }))
   default = []
 }

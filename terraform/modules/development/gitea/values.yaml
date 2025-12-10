@@ -1,7 +1,7 @@
 gitea:
   admin:
     username: admin
-    password: admin
+    password: admin12345
 # postgresql:
 #   enabled: true
 #   postgresqlPassword: admin
@@ -12,4 +12,14 @@ global:
 persistence:
   enabled: true
   storageClass: "openebs-hostpath"
+
+ingress:
+  enabled: true
+  className: "nginx"
+  hosts:
+    - host: gitea.hbarve1.com
+      paths:
+        - path: /
+          pathType: Prefix
+  tls: []
 

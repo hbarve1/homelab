@@ -1,7 +1,12 @@
 expose:
-  type: ClusterIP
+  type: ingress
   tls:
     enabled: false
+  ingress:
+    hosts:
+      core: harbor.hbarve1.com
+    controller: default
+    className: ""
 harborAdminPassword: "admin"
 
 global:

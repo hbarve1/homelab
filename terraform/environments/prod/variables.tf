@@ -46,3 +46,10 @@ variable "rabbitmq_password" {
   sensitive   = true
   default     = "changeme"
 }
+
+variable "cloudflare_tunnel_token" {
+  type        = string
+  description = "Cloudflare Tunnel token (from dashboard - newer token-based auth)"
+  sensitive   = true
+  default     = "eyJhIjoiYzMyMzBjMDk4ODg1MjY1MzhiYzhiYTc4OGRjOTZmYWEiLCJ0IjoiZmI1NmMxNTItODU0Ni00NjljLWIzZWYtNTUzYjUzZWZlNjdiIiwicyI6IlpUTXhPRGszTkRFdE1XVmpNaTAwT1RFd0xXSm1NV1V0TlRjellURmxZamM0WlRFeCJ9"
+}

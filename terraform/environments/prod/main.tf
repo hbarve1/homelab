@@ -43,6 +43,12 @@ module "databases" {
 module "networking" {
   source = "../../modules/networking"
   namespace = kubernetes_namespace.networking.metadata[0].name
+  
+  # Enable Cloudflare Tunnel
+  # Using token-based authentication (configured in Cloudflare dashboard)
+  cloudflare_tunnel_enabled = true
+  cloudflare_tunnel_token = var.cloudflare_tunnel_token
+  cloudflare_tunnel_replicas = 1
 }
 
 module serverless {

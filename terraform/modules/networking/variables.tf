@@ -67,14 +67,21 @@ variable "cloudflare_tunnel_namespace" {
 }
 
 variable "cloudflare_tunnel_id" {
-  description = "Cloudflare Tunnel ID"
+  description = "Cloudflare Tunnel ID (deprecated - use tunnel_token)"
   type        = string
   default     = ""
   sensitive   = true
 }
 
 variable "cloudflare_tunnel_credentials_json" {
-  description = "Cloudflare Tunnel credentials JSON"
+  description = "Cloudflare Tunnel credentials JSON (deprecated - use tunnel_token)"
+  type        = string
+  default     = ""
+  sensitive   = true
+}
+
+variable "cloudflare_tunnel_token" {
+  description = "Cloudflare Tunnel token (from dashboard - newer token-based auth)"
   type        = string
   default     = ""
   sensitive   = true
