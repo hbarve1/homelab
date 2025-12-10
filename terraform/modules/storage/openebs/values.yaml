@@ -12,3 +12,6 @@ jiva:
 cstor:
   enabled: true
 
+# Disable Mayastor to avoid nvme_tcp kernel module dependency on nodes
+mayastor:
+  enabled: false
