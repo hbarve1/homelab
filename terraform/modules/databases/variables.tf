@@ -7,7 +7,7 @@ variable "postgres_password" {
   type        = string
   description = "Postgres admin password"
   sensitive   = true
-  default = "admin"
+  default     = "postgres"
 }
 
 variable "neo4j_password" {

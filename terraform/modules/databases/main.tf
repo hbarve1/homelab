@@ -2,42 +2,42 @@
 #   source            = "../databases/postgres"
 #   release_name      = "postgres-15"
 #   namespace         = var.namespace
-#   postgres_user     = "admin"
+#   postgres_user     = "postgres"
 #   postgres_password = var.postgres_password
-#   postgres_db       = "postgres15"
+#   postgres_db       = "postgres"
 #   storage_size      = "10Gi"
 #   postgres_version  = "15"
 # }
 
 module "postgres_16" {
-  source            = "../databases/postgres"
+  source            = "./postgres"
   release_name      = "postgres-16"
   namespace         = var.namespace
-  postgres_user     = "admin"
+  postgres_user     = "postgres"
   postgres_password = var.postgres_password
-  postgres_db       = "postgres16"
+  postgres_db       = "postgres"
   storage_size      = "10Gi"
   postgres_version  = "16"
 }
 
 module "postgres_17" {
-  source            = "../databases/postgres"
+  source            = "./postgres"
   release_name      = "postgres-17"
   namespace         = var.namespace
-  postgres_user     = "admin"
+  postgres_user     = "postgres"
   postgres_password = var.postgres_password
-  postgres_db       = "postgres17"
+  postgres_db       = "postgres"
   storage_size      = "10Gi"
   postgres_version  = "17"
 }
 
 module "postgres_18" {
-  source            = "../databases/postgres"
+  source            = "./postgres"
   release_name      = "postgres-18"
   namespace         = var.namespace
-  postgres_user     = "admin"
+  postgres_user     = "postgres"
   postgres_password = var.postgres_password
-  postgres_db       = "postgres18"
+  postgres_db       = "postgres"
   storage_size      = "10Gi"
   postgres_version  = "18"
 }

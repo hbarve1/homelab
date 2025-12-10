@@ -17,18 +17,20 @@ variable "chart_version" {
 variable "postgres_user" {
   type        = string
   description = "Postgres admin username"
-  default     = "admin"
+  default     = "postgres"
 }
 
 variable "postgres_password" {
   type        = string
   description = "Postgres admin password"
+  sensitive   = true
+  default     = "postgres"
 }
 
 variable "postgres_db" {
   type        = string
   description = "Default database name"
-  default     = "appdb"
+  default     = "postgres"
 }
 
 variable "storage_size" {
