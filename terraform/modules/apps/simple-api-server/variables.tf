@@ -4,9 +4,21 @@ variable "namespace" {
 }
 
 variable "image_registry" {
-  description = "Docker registry host. Use internal endpoint (registry.container-registry.svc.cluster.local:5000) for Kubernetes, or external IP:port for Docker push"
+  description = "Docker registry host. For GitHub Container Registry use 'ghcr.io', for local registry use 'registry.container-registry.svc.cluster.local:5000'"
   type        = string
-  default     = "registry.container-registry.svc.cluster.local:5000"
+  default     = "ghcr.io"
+}
+
+variable "image_name" {
+  description = "Docker image name (without registry). For GitHub: 'username/repo-name'"
+  type        = string
+  default     = ""
+}
+
+variable "image_pull_secret_name" {
+  description = "Name of the Kubernetes secret containing registry credentials (for private images)"
+  type        = string
+  default     = ""
 }
 
 variable "image_tag" {

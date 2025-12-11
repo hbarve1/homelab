@@ -27,9 +27,16 @@ resource "kubernetes_deployment_v1" "simple_api_server" {
       }
 
       spec {
+        dynamic "image_pull_secrets" {
+          for_each = var.image_pull_secret_name != "" ? [1] : []
+          content {
+            name = var.image_pull_secret_name
+          }
+        }
+
         container {
           name  = "simple-api-server"
-          image = "${var.image_registry}/simple-api-server:${var.image_tag}"
+          image = var.image_name != "" ? "${var.image_registry}/${var.image_name}:${var.image_tag}" : "${var.image_registry}/simple-api-server:${var.image_tag}"
 
           port {
             name           = "http"

@@ -75,9 +75,11 @@ module "storage" {
 #   source = "../../modules/apps/simple-api-server"
   
 #   namespace      = kubernetes_namespace.apps.metadata[0].name
-#   # Set this to Harbor after it is available (e.g., harbor.hbarve1.com)
-#   image_registry = "registry.container-registry.svc.cluster.local:5000"
+#   # GitHub Container Registry configuration
+#   image_registry = "ghcr.io"
+#   image_name     = "your-username/your-repo-name"  # e.g., "hbarve1/simple-api-server"
 #   image_tag      = "latest"
+#   image_pull_secret_name = "ghcr-secret"  # Secret created via: kubectl create secret docker-registry ghcr-secret --docker-server=ghcr.io --docker-username=USERNAME --docker-password=PAT --namespace=apps
   
 #   ingress_enabled = true
 #   ingress_host    = "api-1.hbarve1.com"
