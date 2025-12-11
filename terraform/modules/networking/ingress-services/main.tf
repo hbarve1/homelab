@@ -6,6 +6,17 @@ locals {
   domain        = "hbarve1.com"
 }
 
+# IngressClass for nginx ingress controller
+resource "kubernetes_ingress_class_v1" "nginx" {
+  metadata {
+    name = local.ingress_class
+  }
+
+  spec {
+    controller = "k8s.io/ingress-nginx"
+  }
+}
+
 # Grafana Ingress
 resource "kubernetes_ingress_v1" "grafana" {
   metadata {
