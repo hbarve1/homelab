@@ -21,6 +21,8 @@ module "pihole" {
   service_type                  = var.dns_service_type
   ingress_enabled               = var.dns_ingress_enabled
   ingress_host                  = var.dns_ingress_host
+  storage_class                 = "openebs-hostpath"
+  persistence_enabled           = true
 }
 
 // Ingress resources for HTTP services

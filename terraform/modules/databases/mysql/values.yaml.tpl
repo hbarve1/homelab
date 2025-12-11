@@ -4,6 +4,7 @@ auth:
 
 global:
   imageRegistry: docker.io
+  storageClass: "openebs-hostpath"
 
 image:
   registry: docker.io
@@ -13,3 +14,4 @@ image:
 
 persistence:
   size: ${storage_size}
+  storageClass: "openebs-hostpath"
