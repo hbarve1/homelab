@@ -32,3 +32,4 @@ crash.log
 .env
 .env.local
 .env.*.local
+

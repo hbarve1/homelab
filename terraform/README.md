@@ -47,6 +47,7 @@ terraform/
 ## Documentation
 
 - **[Services Documentation](docs/services.md)** - Comprehensive list of all deployed and planned services
+- **[Secrets Management](docs/secrets-management.md)** - How to manage secret credentials using .env files
 
 ## Commands
 
