@@ -42,7 +42,11 @@ terraform/
 - `global/`: Shared resources (DNS, monitoring, etc.)
 - `modules/`: Reusable modules for compute, network, storage, k8s, etc.
 - `scripts/`: Helper scripts for provisioning or automation.
+- `docs/`: Documentation files
 
+## Documentation
+
+- **[Services Documentation](docs/services.md)** - Comprehensive list of all deployed and planned services
 
 ## Commands
 
