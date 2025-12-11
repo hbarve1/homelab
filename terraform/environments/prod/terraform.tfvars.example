@@ -1,0 +1,7 @@
+# Copy this file to terraform.tfvars and fill in real values
+# terraform.tfvars is auto-loaded by Terraform and should be git-ignored
+
+# GitHub Container Registry (GHCR) auth (used across apps)
+github_username = "your_github_username_here"
+github_pat      = "your_github_pat_with_read_packages_here" # read:packages scope
+ghcr_secret_name = "ghcr-secret"

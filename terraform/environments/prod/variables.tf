@@ -53,3 +53,20 @@ variable "cloudflare_tunnel_token" {
   sensitive   = true
   default     = "eyJhIjoiYzMyMzBjMDk4ODg1MjY1MzhiYzhiYTc4OGRjOTZmYWEiLCJ0IjoiZmI1NmMxNTItODU0Ni00NjljLWIzZWYtNTUzYjUzZWZlNjdiIiwicyI6IlpUTXhPRGszTkRFdE1XVmpNaTAwT1RFd0xXSm1NV1V0TlRjellURmxZamM0WlRFeCJ9"
 }
+
+variable "github_username" {
+  type        = string
+  description = "GitHub username for GHCR"
+}
+
+variable "github_pat" {
+  type        = string
+  description = "GitHub PAT with read:packages for GHCR"
+  sensitive   = true
+}
+
+variable "ghcr_secret_name" {
+  type        = string
+  description = "Name of the GHCR image pull secret"
+  default     = "ghcr-secret"
+}

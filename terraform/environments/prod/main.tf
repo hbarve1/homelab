@@ -71,6 +71,15 @@ module "storage" {
   namespace = kubernetes_namespace.storage.metadata[0].name
 }
 
+module "apps" {
+  source    = "../../modules/apps"
+  namespace = kubernetes_namespace.apps.metadata[0].name
+
+  github_username     = var.github_username
+  github_pat          = var.github_pat
+  ghcr_secret_name    = var.ghcr_secret_name
+}
+
 # module "simple_api_server" {
 #   source = "../../modules/apps/simple-api-server"
   
