@@ -45,10 +45,10 @@ variable "ingress_enabled" {
   default     = true
 }
 
-variable "ingress_host" {
-  description = "Ingress hostname (e.g., api-1.hbarve1.com)"
-  type        = string
-  default     = "api-1.hbarve1.com"
+variable "ingress_hosts" {
+  description = "List of ingress hostnames (e.g., [\"api-1.hbarve1.com\", \"api-test.instanews.app\"])"
+  type        = list(string)
+  default     = ["api-1.hbarve1.com"]
 }
 
 variable "ingress_class_name" {

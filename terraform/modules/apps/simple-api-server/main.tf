@@ -140,19 +140,22 @@ resource "kubernetes_ingress_v1" "simple_api_server" {
   spec {
     ingress_class_name = var.ingress_class_name
 
-    rule {
-      host = var.ingress_host
+    dynamic "rule" {
+      for_each = var.ingress_hosts
+      content {
+        host = rule.value
 
-      http {
-        path {
-          path      = "/"
-          path_type = "Prefix"
+        http {
+          path {
+            path      = "/"
+            path_type = "Prefix"
 
-          backend {
-            service {
-              name = kubernetes_service_v1.simple_api_server.metadata[0].name
-              port {
-                number = 80
+            backend {
+              service {
+                name = kubernetes_service_v1.simple_api_server.metadata[0].name
+                port {
+                  number = 80
+                }
               }
             }
           }
