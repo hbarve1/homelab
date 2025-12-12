@@ -1,4 +1,4 @@
 variable "namespace" {
-  description = "Kubernetes namespace to deploy all database modules into"
+  description = "Kubernetes namespace to deploy emulators into"
   type        = string
 }

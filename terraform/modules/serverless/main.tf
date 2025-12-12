@@ -27,6 +27,6 @@
 # }
 
 module "openfaas" {
-  source = "../serverless/openfaas"
+  source = "./openfaas"
   namespace = var.namespace
 }

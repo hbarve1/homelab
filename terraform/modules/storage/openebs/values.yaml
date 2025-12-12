@@ -1,0 +1,17 @@
+# OpenEBS configuration - All storage engines enabled
+# Storage classes are created automatically by the Helm chart
+# LocalPV hostpath provisioner (local storage)
+localpv-provisioner:
+  enabled: true
+
+# Jiva (replicated storage - simpler)
+jiva:
+  enabled: true
+
+# cStor (replicated storage - advanced features)
+cstor:
+  enabled: true
+
+# Disable Mayastor to avoid nvme_tcp kernel module dependency on nodes
+mayastor:
+  enabled: false

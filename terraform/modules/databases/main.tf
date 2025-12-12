@@ -1,80 +1,157 @@
-module "postgres" {
-  source            = "../databases/postgres"
-  release_name      = "postgres-dev"
+# module "postgres_15" {
+#   source            = "../databases/postgres"
+#   release_name      = "postgres-15"
+#   namespace         = var.namespace
+#   postgres_user     = "postgres"
+#   postgres_password = var.postgres_password
+#   postgres_db       = "postgres"
+#   storage_size      = "10Gi"
+#   postgres_version  = "15"
+# }
+
+module "postgres_16" {
+  source            = "./postgres"
+  release_name      = "postgres-16"
   namespace         = var.namespace
-  postgres_user     = "admin"
+  postgres_user     = "postgres"
   postgres_password = var.postgres_password
-  postgres_db       = "devdb"
-  storage_size      = "20Gi"
+  postgres_db       = "postgres"
+  storage_size      = "10Gi"
+  postgres_version  = "16"
 }
 
-module "neo4j_initial" {
-  source           = "../databases/neo4j"
-  release_name     = "neo4j-dev"
+module "postgres_17" {
+  source            = "./postgres"
+  release_name      = "postgres-17"
   namespace         = var.namespace
-  neo4j_password   = var.neo4j_password
-  neo4j_db         = "neo4j"
-  storage_size     = "8Gi"
-  advertised_host  = "pending"
+  postgres_user     = "postgres"
+  postgres_password = var.postgres_password
+  postgres_db       = "postgres"
+  storage_size      = "10Gi"
+  postgres_version  = "17"
 }
 
-data "kubernetes_service" "neo4j" {
-  metadata {
-    name      = "neo4j-dev"
-    namespace         = var.namespace
-  }
-  depends_on = [module.neo4j_initial]
+module "postgres_18" {
+  source            = "./postgres"
+  release_name      = "postgres-18"
+  namespace         = var.namespace
+  postgres_user     = "postgres"
+  postgres_password = var.postgres_password
+  postgres_db       = "postgres"
+  storage_size      = "10Gi"
+  postgres_version  = "18"
 }
 
-resource "null_resource" "neo4j_upgrade" {
-  depends_on = [data.kubernetes_service.neo4j]
+# module "neo4j_initial" {
+#   source           = "../databases/neo4j"
+#   release_name     = "neo4j-dev"
+#   namespace         = var.namespace
+#   neo4j_password   = var.neo4j_password
+#   neo4j_db         = "neo4j"
+#   storage_size     = "8Gi"
+#   advertised_host  = "pending"
+# }
 
-  provisioner "local-exec" {
-    command = "helm upgrade --namespace databases neo4j-dev oci://registry-1.docker.io/bitnamicharts/neo4j --set advertisedHost=${data.kubernetes_service.neo4j.status[0].load_balancer[0].ingress[0].ip} --set neo4j.password=${var.neo4j_password} --set neo4j.database=neo4j --set persistence.size=8Gi"
-  }
+# data "kubernetes_service" "neo4j" {
+#   metadata {
+#     name      = "neo4j-dev"
+#     namespace         = var.namespace
+#   }
+#   depends_on = [module.neo4j_initial]
+# }
+
+# resource "null_resource" "neo4j_upgrade" {
+#   depends_on = [data.kubernetes_service.neo4j]
+
+#   provisioner "local-exec" {
+#     command = "helm upgrade --namespace databases neo4j-dev oci://registry-1.docker.io/bitnamicharts/neo4j --set advertisedHost=${data.kubernetes_service.neo4j.status[0].load_balancer[0].ingress[0].ip} --set neo4j.password=${var.neo4j_password} --set neo4j.database=neo4j --set persistence.size=8Gi"
+#   }
+# }
+
+module "mysql_5" {
+  source              = "./mysql"
+  release_name        = "mysql-5"
+  namespace           = var.namespace
+  mysql_root_password = var.mysql_root_password
+  mysql_database      = "mysql5"
+  storage_size        = "8Gi"
+  chart_version       = "9.19.1"
+  mysql_version       = "5.7"
 }
 
-module "mysql_1" {
-  source           = "../databases/mysql"
-  release_name     = "mysql-1-dev"
-  namespace        = var.namespace  
-  mysql_root_password = var.mysql1_root_password
-  mysql_database   = "appdb1"
-  storage_size     = "8Gi"
-  chart_version    = "9.19.1"
+module "mysql_8" {
+  source              = "./mysql"
+  release_name        = "mysql-8"
+  namespace           = var.namespace
+  mysql_root_password = var.mysql_root_password
+  mysql_database      = "mysql8"
+  storage_size        = "8Gi"
+  chart_version       = "9.19.1"
+  mysql_version       = "8.0"
 }
 
-module "mysql_2" {
-  source           = "../../modules/databases/mysql"
-  release_name     = "mysql-2-dev"
+module "mysql_9" {
+  source              = "./mysql"
+  release_name        = "mysql-9"
+  namespace           = var.namespace
+  mysql_root_password = var.mysql_root_password
+  mysql_database      = "mysql9"
+  storage_size        = "8Gi"
+  chart_version       = "9.19.1"
+  mysql_version       = "9.0"
+}
+
+module "redis_6" {
+  source           = "./redis"
+  release_name     = "redis-6"
   namespace        = var.namespace
-  mysql_root_password = var.mysql2_root_password
-  mysql_database   = "appdb2"
-  storage_size     = "8Gi"
-  chart_version    = "9.18.2"
-}
-
-module "redis" {
-  source           = "../databases/redis"
-  release_name     = "redis-dev"
-  namespace         = var.namespace
   redis_password   = var.redis_password
   storage_size     = "8Gi"
+  redis_version    = "6"
 }
 
-module "elasticsearch" {
-  source                = "../databases/elasticsearch"
-  release_name          = "elasticsearch-dev"
-  namespace             = var.namespace
-  elasticsearch_password = var.elasticsearch_password
-  storage_size          = "8Gi"
+module "redis_7" {
+  source           = "./redis"
+  release_name     = "redis-7"
+  namespace        = var.namespace
+  redis_password   = var.redis_password
+  storage_size     = "8Gi"
+  redis_version    = "7"
 }
+
+module "redis_8" {
+  source           = "./redis"
+  release_name     = "redis-8"
+  namespace        = var.namespace
+  redis_password   = var.redis_password
+  storage_size     = "8Gi"
+  redis_version    = "8"
+}
+
+# module "elasticsearch" {
+#   source                = "../databases/elasticsearch"
+#   release_name          = "elasticsearch-dev"
+#   namespace             = var.namespace
+#   elasticsearch_password = var.elasticsearch_password
+#   storage_size          = "8Gi"
+# }
 
 module "dgraph" {
-  source = "../databases/dgraph"
+  source = "./dgraph"
+  namespace = var.namespace
 }
 
 module "qdrant" {
-  source = "../databases/qdrant"
+  source = "./qdrant"
   namespace = var.namespace
+}
+
+module "mongodb_8" {
+  source = "./mongodb"
+  release_name = "mongodb"
+  namespace = var.namespace
+  mongodb_root_password = var.mongodb_root_password
+  mongodb_database = "mongodb"
+  storage_size = "10Gi"
+  mongodb_version = "8"
 }

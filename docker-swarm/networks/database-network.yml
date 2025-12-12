@@ -1,0 +1,16 @@
+version: '3.8'
+
+networks:
+  database:
+    driver: overlay
+    driver_opts:
+      encrypted: "true"
+    ipam:
+      config:
+        - subnet: 10.3.0.0/16
+          gateway: 10.3.0.1
+    attachable: true
+    labels:
+      - "com.homelab.network.type=database"
+      - "com.homelab.network.purpose=database-communication"
+      - "com.homelab.network.security=high"

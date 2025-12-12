@@ -11,7 +11,7 @@ variable "namespace" {
 variable "chart_version" {
   type        = string
   description = "Bitnami MongoDB chart version"
-  default     = "16.5.8"
+  default     = "18.1.10"
 }
 
 variable "mongodb_root_password" {
@@ -29,4 +29,10 @@ variable "storage_size" {
   type        = string
   description = "Persistent volume size"
   default     = "8Gi"
+}
+
+variable "mongodb_version" {
+  type        = string
+  description = "MongoDB version"
+  default     = "8"
 }

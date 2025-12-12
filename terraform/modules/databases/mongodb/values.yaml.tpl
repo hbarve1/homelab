@@ -9,3 +9,4 @@ auth:
 persistence:
   enabled: true
   size: ${storage_size}
+  storageClass: "openebs-hostpath"

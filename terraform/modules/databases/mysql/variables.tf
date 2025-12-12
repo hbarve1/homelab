@@ -11,7 +11,7 @@ variable "namespace" {
 variable "chart_version" {
   type        = string
   description = "Bitnami MySQL chart version"
-  default     = "9.19.1"
+  default     = "14.0.3"
 }
 
 variable "mysql_root_password" {
@@ -29,4 +29,10 @@ variable "storage_size" {
   type        = string
   description = "Persistent volume size"
   default     = "8Gi"
+}
+
+variable "mysql_version" {
+  type        = string
+  description = "MySQL version tag (e.g., '5.7', '8.0', '9.0')"
+  default     = "8.0"
 }

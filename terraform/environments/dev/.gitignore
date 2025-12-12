@@ -28,5 +28,7 @@ crash.log
 *.swp
 *.bak
 
-# Uncomment below if you want to ignore all .env files
-# .env*
+# Ignore .env files containing secrets
+.env
+.env.local
+.env.*.local

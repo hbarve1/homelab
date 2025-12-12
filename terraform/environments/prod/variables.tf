@@ -1,31 +1,72 @@
+variable "postgres_password" {
+  type        = string
+  description = "Postgres admin password"
+  sensitive   = true
+  default     = "admin"
+}
 
-# variable "neo4j_username" {
-#   description = "Username for the Neo4j database admin user."
-#   type        = string
-#   default     = "neo4j"
-# }
+variable "neo4j_password" {
+  type        = string
+  description = "Neo4j admin password"
+  sensitive   = true
+  default     = "admin"
+}
 
-# variable "neo4j_password" {
-#   description = "Password for the Neo4j database admin user."
-#   type        = string
-#   default     = "YourStrongPasswordHere" # Change this to a secure password
-#   sensitive   = true
-# }
+variable "mysql_root_password" {
+  type        = string
+  description = "MySQL root password"
+  sensitive   = true
+  default     = "admin"
+}
 
-# variable "neo4j_db" {
-#   description = "Name of the Neo4j database to create."
-#   type        = string
-#   default     = "neo4j"
-# }
+variable "redis_password" {
+  type        = string
+  description = "Redis password"
+  sensitive   = true
+  default     = "admin"
+}
 
-# variable "neo4j_storage_size" {
-#   description = "Persistent volume size for Neo4j data."
-#   type        = string
-#   default     = "64Gi"
-# }
+variable "mongodb_root_password" {
+  type        = string
+  description = "MongoDB root password"
+  sensitive   = true
+  default = "admin"
+}
 
-# variable "neo4j_advertised_host" {
-#   description = "The advertised host for Neo4j service."
-#   type        = string
-#   default     = "neo4j.neo4j.svc.cluster.local" # Change this to your actual domain
-# }
+variable "elasticsearch_password" {
+  type        = string
+  description = "Elasticsearch password for the elastic user"
+  sensitive   = true
+  default     = "admin"
+}
+
+variable "rabbitmq_password" {
+  type        = string
+  description = "RabbitMQ default user password"
+  sensitive   = true
+  default     = "changeme"
+}
+
+variable "cloudflare_tunnel_token" {
+  type        = string
+  description = "Cloudflare Tunnel token (from dashboard - newer token-based auth)"
+  sensitive   = true
+  default     = "eyJhIjoiYzMyMzBjMDk4ODg1MjY1MzhiYzhiYTc4OGRjOTZmYWEiLCJ0IjoiZmI1NmMxNTItODU0Ni00NjljLWIzZWYtNTUzYjUzZWZlNjdiIiwicyI6IlpUTXhPRGszTkRFdE1XVmpNaTAwT1RFd0xXSm1NV1V0TlRjellURmxZamM0WlRFeCJ9"
+}
+
+variable "github_username" {
+  type        = string
+  description = "GitHub username for GHCR"
+}
+
+variable "github_pat" {
+  type        = string
+  description = "GitHub PAT with read:packages for GHCR"
+  sensitive   = true
+}
+
+variable "ghcr_secret_name" {
+  type        = string
+  description = "Name of the GHCR image pull secret"
+  default     = "ghcr-secret"
+}
