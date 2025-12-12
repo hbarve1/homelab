@@ -12,7 +12,7 @@ resource "helm_release" "dgraph" {
         replicaCount = 1
         persistence = {
           enabled      = true
-          storageClass = "microk8s-hostpath"  # Use MicroK8s default storage class
+          storageClass = "openebs-hostpath"  # Use OpenEBS with immediate binding
           size         = "5Gi"
         }
         resources = {
@@ -36,7 +36,7 @@ resource "helm_release" "dgraph" {
         replicaCount = 1
         persistence = {
           enabled      = true
-          storageClass = "microk8s-hostpath"  # Use MicroK8s default storage class
+          storageClass = "openebs-hostpath"  # Use OpenEBS with immediate binding
           size         = "2Gi"
         }
         resources = {

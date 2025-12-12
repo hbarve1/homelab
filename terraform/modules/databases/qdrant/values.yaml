@@ -1,10 +1,7 @@
 service:
   type: ClusterIP
 
-global:
-  storageClass: "openebs-hostpath"
-
 persistence:
   enabled: true
   size: 10Gi
-  storageClass: "openebs-hostpath"
+  storageClassName: "openebs-hostpath"

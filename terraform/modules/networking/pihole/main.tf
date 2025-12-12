@@ -56,6 +56,7 @@ resource "kubernetes_deployment" "pihole" {
 
   spec {
     replicas = var.replicas
+    progress_deadline_seconds = 600
 
     selector {
       match_labels = {
@@ -126,6 +127,26 @@ resource "kubernetes_deployment" "pihole" {
               add = ["NET_ADMIN", "NET_BIND_SERVICE"]
             }
           }
+
+          readiness_probe {
+            tcp_socket {
+              port = 80
+            }
+            initial_delay_seconds = 30
+            period_seconds        = 10
+            timeout_seconds       = 5
+            failure_threshold     = 3
+          }
+
+          liveness_probe {
+            tcp_socket {
+              port = 80
+            }
+            initial_delay_seconds = 60
+            period_seconds        = 30
+            timeout_seconds       = 5
+            failure_threshold     = 3
+          }
         }
 
         dynamic "volume" {
@@ -146,15 +167,20 @@ resource "kubernetes_deployment" "pihole" {
           }
         }
 
-        dns_policy = "None"
-        dns_config {
-          nameservers = ["127.0.0.1"]
-        }
+        # DNS policy: ClusterFirst allows pihole to resolve external DNS during startup
+        # Once pihole is running, it will use itself for DNS resolution
+        dns_policy = "ClusterFirst"
       }
     }
   }
 
   depends_on = [kubernetes_config_map.pihole_config]
+
+  timeouts {
+    create = "10m"
+    update = "10m"
+    delete = "5m"
+  }
 }
 
 resource "kubernetes_service_v1" "pihole" {

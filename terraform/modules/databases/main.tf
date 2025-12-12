@@ -102,7 +102,7 @@ module "mysql_9" {
 }
 
 module "redis_6" {
-  source           = "../databases/redis"
+  source           = "./redis"
   release_name     = "redis-6"
   namespace        = var.namespace
   redis_password   = var.redis_password
@@ -111,7 +111,7 @@ module "redis_6" {
 }
 
 module "redis_7" {
-  source           = "../databases/redis"
+  source           = "./redis"
   release_name     = "redis-7"
   namespace        = var.namespace
   redis_password   = var.redis_password
@@ -120,7 +120,7 @@ module "redis_7" {
 }
 
 module "redis_8" {
-  source           = "../databases/redis"
+  source           = "./redis"
   release_name     = "redis-8"
   namespace        = var.namespace
   redis_password   = var.redis_password
