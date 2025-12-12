@@ -6,7 +6,7 @@ resource "kubernetes_deployment_v1" "simple_api_server" {
   }
 
   spec {
-    replicas = 1
+    replicas = var.autoscaling_enabled ? var.min_replicas : 1
     selector { match_labels = { app = "simple-api-server" } }
 
     template {
@@ -125,3 +125,34 @@ resource "kubernetes_ingress_v1" "simple_api_server" {
   }
 }
 
+resource "kubernetes_horizontal_pod_autoscaler_v2" "simple_api_server" {
+  count = var.autoscaling_enabled ? 1 : 0
+
+  metadata {
+    name      = "simple-api-server"
+    namespace = var.namespace
+    labels    = { app = "simple-api-server" }
+  }
+
+  spec {
+    min_replicas = var.min_replicas
+    max_replicas = var.max_replicas
+
+    scale_target_ref {
+      api_version = "apps/v1"
+      kind        = "Deployment"
+      name        = kubernetes_deployment_v1.simple_api_server.metadata[0].name
+    }
+
+    metric {
+      type = "Resource"
+      resource {
+        name = "cpu"
+        target {
+          type                = "Utilization"
+          average_utilization = var.target_cpu_utilization
+        }
+      }
+    }
+  }
+}

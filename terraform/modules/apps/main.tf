@@ -7,4 +7,8 @@ module "simple_api_server" {
   image_tag              = "develop"
   image_pull_secret_name = var.ghcr_secret_name
   ingress_hosts          = ["api-1.hbarve1.com", "api-test.instanews.app"]
+  autoscaling_enabled    = true
+  min_replicas           = 1
+  max_replicas           = 50
+  target_cpu_utilization = 70
 }

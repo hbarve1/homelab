@@ -37,3 +37,27 @@ variable "ingress_hosts" {
   default     = []
 }
 
+variable "autoscaling_enabled" {
+  description = "Enable horizontal pod autoscaling"
+  type        = bool
+  default     = true
+}
+
+variable "min_replicas" {
+  description = "Minimum number of replicas"
+  type        = number
+  default     = 1
+}
+
+variable "max_replicas" {
+  description = "Maximum number of replicas"
+  type        = number
+  default     = 50
+}
+
+variable "target_cpu_utilization" {
+  description = "Target CPU utilization percentage"
+  type        = number
+  default     = 70
+}
+
